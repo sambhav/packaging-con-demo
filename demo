@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# text color
+DEMO_CMD_COLOR=$WHITE
+
+# hide the evidence
+clear
+
+pe "show"
+pe "docker build -t demo ."
+pe "dive demo"
