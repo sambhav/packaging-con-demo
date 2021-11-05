@@ -1,0 +1,14 @@
+#!/bin/bash
+source ./demo-magic.sh
+SHOW_CMD_NUMS=true
+# hide the evidence
+clear
+
+docker rm demo-container -f 2>/dev/null 1>&2 || true
+
+pe "docker run -d --name demo-container busybox sleep infinity"
+pe 'docker exec demo-container /bin/sh -c "echo \"Hello World\" > /demo"'
+pe 'docker exec demo-container /bin/sh -c "cat /demo"'
+pe 'docker commit -m "Add demo file" demo-container demo-image'
+pe 'docker run demo-image cat /demo'
+pe 'dive demo-image'

@@ -11,7 +11,7 @@
 ###############################################################################
 
 # the speed to "type" the text
-TYPE_SPEED=20
+TYPE_SPEED=30
 
 # no wait after "p" or "pe"
 NO_WAIT=false
@@ -78,11 +78,7 @@ function wait() {
 #
 ##
 function p() {
-  if [[ ${1:0:1} == "#" ]]; then
-    cmd=$DEMO_COMMENT_COLOR$1$COLOR_RESET
-  else
-    cmd=$DEMO_CMD_COLOR$1$COLOR_RESET
-  fi
+  cmd=$1
 
   # render the prompt
   x=$(PS1="$DEMO_PROMPT" "$BASH" --norc -i </dev/null 2>&1 | sed -n '${s/^\(.*\)exit$/\1/p;}')
@@ -149,7 +145,7 @@ function pei {
 function cmd() {
   # render the prompt
   x=$(PS1="$DEMO_PROMPT" "$BASH" --norc -i </dev/null 2>&1 | sed -n '${s/^\(.*\)exit$/\1/p;}')
-  printf "$x\033[0m"
+  printf "$x"
   read command
   run_cmd "${command}"
 }
@@ -212,4 +208,4 @@ while getopts ":dhncw:" opt; do
   esac
 done
 
-DEMO_PROMPT="${GREEN}➜ ${CYAN}\W "
+DEMO_PROMPT="${GREEN}➜ ${CYAN}\W${COLOR_RESET} "

@@ -1,0 +1,8 @@
+#!/bin/bash
+source ./demo-magic.sh
+SHOW_CMD_NUMS=true
+clear
+
+pe "show"
+pe "docker build -t demo ."
+pe "dive demo"
